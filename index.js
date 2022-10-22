@@ -19,6 +19,8 @@ const signUp = () =>{
     document.getElementById('sign-up-form').reset()
     console.log(USER_D)
     alert('Sign Up Successfull!')
+
+    changeNavLinks(userDetails)
 } 
 
 const signIn = () =>{
@@ -26,6 +28,7 @@ const signIn = () =>{
     let enteredPassword = document.getElementById('login-password').value
 
     alert(USER_DB.find(user => user.email === enteredEmail && user.password === enteredPassword)? 'Access Granted':'Access Denied')
+    document.getElementById('sign-in-form').reset()
 }
 
 const goToSignUp = () =>{
@@ -45,3 +48,18 @@ const goToSignIn = () =>{
     document.getElementById('sign-in').style.display = 'block'
     document.getElementById('sign-up').style.display = 'none'
 }
+
+ const changeNavLinks = (currentUser) => {
+    let { firstName, lastName } = currentUser
+    document.getElementById('sign-up-nav-link').style.display = 'none'
+    document.getElementById('sign-in-nav-link').style.display = 'none'
+
+    document.getElementById('profile-nav-link').style.display = 'none'
+    document.getElementById('sign-out-nav-link').style.display = 'none'
+
+    document.getElementById('profile-nav-link').innerText = `Hi, ${firstName} ${lastName}`
+ }
+
+ const signOut = () => {
+
+ }
