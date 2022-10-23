@@ -32,6 +32,18 @@ const encrypt = (inputString) => {
     return encryptedString
 }
 
+const decrypt = (encryptedString) => {
+    let originalString = ''
+
+    let keys = Object.keys(encryptionRule)
+    let values = Object.values(encryptionRule)
+    for (let char of encryptedString) {
+        let requiredIndex = values.indexOf(char)
+        originalString = originalString + keys[requiredIndex]
+    }
+    return originalString
+}
+
 const signUp = () => {
     let firstName = document.getElementById('firstName').value
     let lastName = document.getElementById('lastName').value
@@ -64,7 +76,7 @@ const signIn = () => {
 
     let requiredUser = USER_DB.find(
         (user) => 
-            user.email === enteredEmail && user.password === enteredPassword
+            user.email === enteredEmail && decrypt(user.password) === enteredPassword
     );
     if (requiredUser) {
         alert('Access Granted')
